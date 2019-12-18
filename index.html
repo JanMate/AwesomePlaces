@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Awesome places</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -16,8 +16,10 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Movie Location Map</h1>
-    <p>Find the place in which movies are made and rate them!</p>
+    <h1>Awesome places</h1>
+    <p>Welcome to our page with awesome places!</p>
+    <p>Type your prefer activity in Prague and we will recommend you the best way!</p>
+    <p>Your location: <b>Václavské naměstí, Praha</b> (50.0842086, 14.4234842)</p>
 </div>
 
 <div class="container">
@@ -25,93 +27,68 @@
         <div class="col-sm-12">
             <div class="list-group">
                 <a class="list-group-item list-group-item-action flex-column align-items-start"
-                   id="element_one">
+                   id="element_1">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" id="movie_name_one">Frozen</h5>
-                        <form id="form_one">
-                            <select id="rating_one">
-                                <option value="1">1 star</option>
-                                <option value="2">2 stars</option>
-                                <option value="3">3 stars</option>
-                                <option value="4">4 stars</option>
-                                <option value="5" selected="selected">5 stars</option>
-                            </select>
+                        <h5 class="mb-1" id="place_name_1">Restaurant</h5>
+                        <form id="form_1">
+                            <label>Do you like it?</label>
+                            <input type="checkbox" id="rating_1" />
                         </form>
                     </div>
-                    <p class="mb-1" id="studio_one">Walt Disney Animation Studios</p>
-                    <small id="headquarter_one">US</small>
+                    <p class="mb-1" id="place_1">In Prague city center</p>
+                    <p class="mb-1" id="location_1"></p>
                 </a>
 
                 <a class="list-group-item list-group-item-action flex-column align-items-start"
-                   id="element_two">
+                   id="element_2">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" id="movie_name_two">Frozen</h5>
-                        <form id="form_two">
-                            <select id="rating_two">
-                                <option value="1">1 star</option>
-                                <option value="2">2 stars</option>
-                                <option value="3">3 stars</option>
-                                <option value="4">4 stars</option>
-                                <option value="5" selected="selected">5 stars</option>
-                            </select>
+                        <h5 class="mb-1" id="place_name_2">Bar</h5>
+                        <form id="form_2">
+                            <label>Do you like it?</label>
+                            <input type="checkbox" id="rating_2" />
                         </form>
                     </div>
-                    <p class="mb-1" id="studio_two">Walt Disney Animation Studios</p>
-                    <small id="headquarter_two">US</small>
+                    <p class="mb-1" id="place_2">In Prague city center</p>
+                    <p class="mb-1" id="location_2"></p>
                 </a>
 
                 <a class="list-group-item list-group-item-action flex-column align-items-start"
-                   id="element_three">
+                   id="element_3">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" id="movie_name_three">Frozen</h5>
-                        <form id="form_three">
-                            <select id="rating_three">
-                                <option value="1">1 star</option>
-                                <option value="2">2 stars</option>
-                                <option value="3">3 stars</option>
-                                <option value="4">4 stars</option>
-                                <option value="5" selected="selected">5 stars</option>
-                            </select>
+                        <h5 class="mb-1" id="place_name_3">Theatre</h5>
+                        <form id="form_3">
+                            <label>Do you like it?</label>
+                            <input type="checkbox" id="rating_3" />
                         </form>
                     </div>
-                    <p class="mb-1" id="studio_three">Walt Disney Animation Studios</p>
-                    <small id="headquarter_three">US</small>
+                    <p class="mb-1" id="place_3">In Prague city center</p>
+                    <p class="mb-1" id="location_3"></p>
                 </a>
 
                 <a class="list-group-item list-group-item-action flex-column align-items-start"
-                   id="element_four">
+                   id="element_4">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" id="movie_name_four">Frozen</h5>
-                        <form id="form_four">
-                            <select id="rating_four">
-                                <option value="1">1 star</option>
-                                <option value="2">2 stars</option>
-                                <option value="3">3 stars</option>
-                                <option value="4">4 stars</option>
-                                <option value="5" selected="selected">5 stars</option>
-                            </select>
+                        <h5 class="mb-1" id="place_name_4">Cinema</h5>
+                        <form id="form_4">
+                            <label>Do you like it?</label>
+                            <input type="checkbox" id="rating_4" />
                         </form>
                     </div>
-                    <p class="mb-1" id="studio_four">Walt Disney Animation Studios</p>
-                    <small id="headquarter_four">US</small>
+                    <p class="mb-1" id="place_4">In Prague city center</p>
+                    <p class="mb-1" id="location_4"></p>
                 </a>
 
                 <a class="list-group-item list-group-item-action flex-column align-items-start"
-                   id="element_five">
+                   id="element_5">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" id="movie_name_five">Frozen</h5>
-                        <form id="form_five">
-                            <select id="rating_five">
-                                <option value="1">1 star</option>
-                                <option value="2">2 stars</option>
-                                <option value="3">3 stars</option>
-                                <option value="4">4 stars</option>
-                                <option value="5" selected="selected">5 stars</option>
-                            </select>
+                        <h5 class="mb-1" id="place_name_5">Park</h5>
+                        <form id="form_5">
+                            <label>Do you like it?</label>
+                            <input type="checkbox" id="rating_5" />
                         </form>
                     </div>
-                    <p class="mb-1" id="studio_five">Walt Disney Animation Studios</p>
-                    <small id="headquarter_five">US</small>
+                    <p class="mb-1" id="place_5">In Prague city center</p>
+                    <p class="mb-1" id="location_5"></p>
                 </a>
             </div>
         </div>

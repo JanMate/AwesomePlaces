@@ -1,71 +1,73 @@
-var indexToWord = {0: "one", 1: "two", 2: "three", 3: "four", 4: "five"};
+var types = ["restaurant", "bar", "theater", "cinema", "park"];
 
 window.addEventListener("load", function () {
     init_map();
-    show_movies();
-    document.getElementById("element_one").addEventListener("click", function () {
-        show_place(document.getElementById("headquarter_one").innerHTML);
+
+    show_places_detail(1, types[0]);
+    document.getElementById("element_1").addEventListener("click", function () {
+        show_place(document.getElementById("location_1").innerHTML);
     });
-    document.getElementById("element_two").addEventListener("click", function () {
-        show_place(document.getElementById("headquarter_two").innerHTML);
+    show_places_detail(2, types[1]);
+    document.getElementById("element_2").addEventListener("click", function () {
+        show_place(document.getElementById("location_2").innerHTML);
     });
-    document.getElementById("element_three").addEventListener("click", function () {
-        show_place(document.getElementById("headquarter_three").innerHTML);
+    show_places_detail(3, types[2]);
+    document.getElementById("element_3").addEventListener("click", function () {
+        show_place(document.getElementById("location_3").innerHTML);
     });
-    document.getElementById("element_four").addEventListener("click", function () {
-        show_place(document.getElementById("headquarter_four").innerHTML);
+    show_places_detail(4, types[3]);
+    document.getElementById("element_4").addEventListener("click", function () {
+        show_place(document.getElementById("location_4").innerHTML);
     });
-    document.getElementById("element_five").addEventListener("click", function () {
-        show_place(document.getElementById("headquarter_five").innerHTML);
+    show_places_detail(5, types[4]);
+    document.getElementById("element_5").addEventListener("click", function () {
+        show_place(document.getElementById("location_5").innerHTML);
     });
 
-    document.getElementById("rating_one").addEventListener("change", function () {
-        var movie_name = document.getElementById("movie_name_one").innerHTML;
-        var rating =  document.getElementById("rating_one").value;
-        set_rating(movie_name, rating);
+
+    document.getElementById("rating_1").addEventListener("change", function () {
+        var place_name = document.getElementById("place_name_1").innerHTML;
+        var rating = document.getElementById("rating_1").value;
+        set_rating(place_name, rating);
     });
-    document.getElementById("rating_two").addEventListener("change", function () {
-        var movie_name = document.getElementById("movie_name_two").innerHTML;
-        var rating =  document.getElementById("rating_two").value;
-        set_rating(movie_name, rating);
+    document.getElementById("rating_2").addEventListener("change", function () {
+        var place_name = document.getElementById("place_name_2").innerHTML;
+        var rating = document.getElementById("rating_2").value;
+        set_rating(place_name, rating);
     });
-    document.getElementById("rating_three").addEventListener("change", function () {
-        var movie_name = document.getElementById("movie_name_three").innerHTML;
-        var rating =  document.getElementById("rating_three").value;
-        set_rating(movie_name, rating);
+    document.getElementById("rating_3").addEventListener("change", function () {
+        var place_name = document.getElementById("place_name_3").innerHTML;
+        var rating = document.getElementById("rating_3").value;
+        set_rating(place_name, rating);
     });
-    document.getElementById("rating_four").addEventListener("change", function () {
-        var movie_name = document.getElementById("movie_name_four").innerHTML;
-        var rating =  document.getElementById("rating_four").value;
-        set_rating(movie_name, rating);
+    document.getElementById("rating_4").addEventListener("change", function () {
+        var place_name = document.getElementById("place_name_4").innerHTML;
+        var rating = document.getElementById("rating_4").value;
+        set_rating(place_name, rating);
     });
-    document.getElementById("rating_five").addEventListener("change", function () {
-        var movie_name = document.getElementById("movie_name_five").innerHTML;
-        var rating =  document.getElementById("rating_five").value;
-        set_rating(movie_name, rating);
+    document.getElementById("rating_5").addEventListener("change", function () {
+        var place_name = document.getElementById("place_name_5").innerHTML;
+        var rating = document.getElementById("rating_5").value;
+        set_rating(place_name, rating);
     });
+
 });
 
 // ----------- MAPY.CZ -------------------
 function init_map() {
     var stred = SMap.Coords.fromWGS84(14.41, 50.08);
-    var mapa = new SMap(JAK.gel("mapa"), stred, 10);
+    var mapa = new SMap(JAK.gel("mapa"), stred, 11);
     mapa.addDefaultLayer(SMap.DEF_BASE).enable();
     mapa.addDefaultControls();
 }
 
-function odpoved(geocoder) {
-    if (!geocoder.getResults()[0].results.length) {
-        alert("Tohle neznáme.");
-        return;
-    }
-
-    var vysledky = geocoder.getResults()[0].results;
-    var data = [];
-    var item = vysledky.shift();
-    var coords = item.coords;
-
-    var mapa = new SMap(JAK.gel("mapa"), coords, 10);
+function show_place(coords) {
+    coords = coords.split(', ');
+    var lat = parseFloat(coords[0]);
+    var lng = parseFloat(coords[1]);
+    console.log(lat);
+    console.log(lng);
+    var mapa = new SMap(JAK.gel("mapa"), SMap.Coords.fromWGS84(lng, lat), 15);
     mapa.addDefaultLayer(SMap.DEF_BASE).enable();
     mapa.addDefaultControls();
 
@@ -74,106 +76,56 @@ function odpoved(geocoder) {
     layer.enable();
 
     var options = {};
-    var marker = new SMap.Marker(coords, "myMarker", options);
+    var marker = new SMap.Marker(SMap.Coords.fromWGS84(lng, lat), "myMarker", options);
     layer.addMarker(marker);
-}
-
-function show_place(name) {
-    new SMap.Geocoder(name, odpoved);
-}
-
-
-// ----------- TMDB -------------------
-function show_movies() {
-    var data = "{}";
-
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = false;
-
-    xhr.addEventListener("readystatechange", function () {
-        if (this.readyState === this.DONE) {
-            var response = JSON.parse(this.responseText);
-            for (var i = 0; i < 5; i++) {
-                show_movie(i, response["results"][i]["id"]);
-            }
-        }
-    });
-
-    xhr.open("GET", "https://api.themoviedb.org/3/movie/now_playing?page=1&language=en-US&api_key=bea1bcfee4ca6f9afacfd24b6fc895a3");
-
-    xhr.send(data);
-}
-
-function show_movie(i, id) {
-    var data = "{}";
-
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = false;
-
-    xhr.addEventListener("readystatechange", function () {
-        if (this.readyState === this.DONE) {
-            var response = JSON.parse(this.responseText);
-            var title = response["title"];
-            var production_company = response["production_companies"][0]["name"];
-            var production_company_id = response["production_companies"][0]["id"];
-
-            document.getElementById("movie_name_" + indexToWord[i]).innerHTML = title;
-            document.getElementById("studio_" + indexToWord[i]).innerHTML = production_company;
-
-            get_rating(i);
-
-            show_headquarters(i, production_company_id)
-        }
-    });
-
-    xhr.open("GET", "https://api.themoviedb.org/3/movie/" + id + "?language=en-US&api_key=bea1bcfee4ca6f9afacfd24b6fc895a3");
-
-    xhr.send(data);
-}
-
-function show_headquarters(i, id) {
-    var data = "{}";
-
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = false;
-
-    xhr.addEventListener("readystatechange", function () {
-        if (this.readyState === this.DONE) {
-            var response = JSON.parse(this.responseText);
-            var headquarter = response["headquarters"];
-            var el_id = "headquarter_" + indexToWord[i];
-            var el = document.getElementById(el_id);
-            el.innerHTML = headquarter;
-        }
-    });
-
-    xhr.open("GET", "https://api.themoviedb.org/3/company/" + id + "?language=en-US&api_key=bea1bcfee4ca6f9afacfd24b6fc895a3");
-
-    xhr.send(data);
 }
 
 
 // ----------- BACKEND -------------------
+
+function show_places_detail(i, id) {
+    var data = "{}";
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = false;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            var response = JSON.parse(this.responseText);
+            var lat = response["response"]["venues"][0]["location"]['lat'];
+            var long = response["response"]["venues"][0]["location"]['lng'];
+            document.getElementById("location_" + i).innerHTML = lat + ', ' + long;
+
+            get_rating(i);
+
+            //show_headquarters(i, production_company_id)
+        }
+    });
+
+    xhr.open("GET", "http://127.0.0.1:5000/places/" + id);
+
+    xhr.send(data);
+}
+
 function get_rating(i) {
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = false;
-    var movie_name = document.getElementById("movie_name_" + indexToWord[i]).innerHTML;
-    var url = "http://127.0.0.1:5000/ratings/"+movie_name+"/";
+    var place_name = document.getElementById("place_name_" + i).innerHTML;
+    var url = "http://127.0.0.1:5000/ratings/"+place_name+"/";
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.parse(xhr.responseText);
-            var rating = json["rating"];
-            document.getElementById("rating_"+indexToWord[i]).value = rating;
+            // var json = JSON.parse(xhr.responseText);
+            document.getElementById("rating_"+i).value = (xhr.responseText ? 'on' : 'off');
         }
     };
     xhr.send();
 }
 
-function set_rating(movie, rating){
+function set_rating(name, rating){
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = false;
-    var url = "http://127.0.0.1:5000/ratings/"+movie+"/"+rating;
+    var url = "http://127.0.0.1:5000/ratings/"+name+"/";
     xhr.open("PUT", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
